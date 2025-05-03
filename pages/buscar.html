@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Pacientes - Veterinaria</title>
-    <link rel="stylesheet" href="../css/busqueda.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <script defer src="../js/02.js"></script>
 </head>
@@ -33,18 +33,21 @@
           </div>
         </div>
       </nav>
-
+      <div class="contenedor">
 <div id="PantallaPrincipal">
-<div style="margin: 20px 0; width: 300px;">
+<div class="busqueda"">
     <h3>Buscar Paciente</h3>
     <input class="impDeBusqueda" type="text" id="buscarNombre" placeholder="Nombre">
     <input class="impDeBusqueda" type="text" id="buscarApellido" placeholder="Apellido">
-    <button onclick="buscarPaciente()">Buscar</button>
+    <input class="impDeBusqueda" type="date" id="buscarFecha" placeholder="Fecha (AAAA-MM-DD)">
+    <button style="margin-bottom: 10px ;" onclick="buscarPaciente()">Buscar por nombre</button>
+    <button onclick="buscarPorFecha()">Buscar por fecha</button>
 </div>
 
-<div id="PantallaDeVista">
+<div id="PantallaDeVista" class="achicarTam">
 <h1>Registro de Pacientes Veterinarios</h1>
     <p id="listadoDePacientes"></p>
+</div>
 </div>
 </div>
 
