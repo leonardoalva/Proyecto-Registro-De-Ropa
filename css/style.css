@@ -20,6 +20,7 @@ h1 {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 100%;
+  margin: 20px;
 }
 #formularioPaciente {
   width: 100%;
@@ -37,6 +38,7 @@ label {
   margin-bottom: 5px;
   font-weight: bold;
 }
+input[type="date"],
 input[type="text"],
 input[type="email"],
 input[type="number"],
@@ -47,6 +49,7 @@ select {
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
+  margin-bottom: 5px;
 }
 .radio-group {
   display: flex;
@@ -64,6 +67,7 @@ select {
   display: flex;
   flex-direction: row;
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 #PantallaPrincipal {
@@ -78,7 +82,9 @@ select {
 
 
 #PantallaDeVista {
-  width: 100%;
+  width: 70%;
+  border: 5px solid black;
+  padding: 30px;
 }
 
 button {
@@ -91,13 +97,16 @@ button {
   font-size: 16px;
   height: 50px;
   width: 100%;
+  gap: 10px;
 }
 button:hover {
   background-color: #2980b9;
 }
 
 p {
-  font-size: small;
+  font-size: 15px;
+  margin-left: 10px;
+
 }
 
 .moverAlaIsquierda{

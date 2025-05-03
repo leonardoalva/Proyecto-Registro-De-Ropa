@@ -135,6 +135,12 @@ class Dia {
             paciente.apellido.toLowerCase().includes(apellidoBusqueda)
         );
     }
+
+    buscarPorFecha(fecha) {
+        return this.pacientes.filter(paciente => 
+            paciente.fecha === fecha
+        );
+    }
 }
 
 
@@ -240,6 +246,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('buscarApellido').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') buscarPaciente();
+    document.getElementById('buscarFecha').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') buscarPorFecha();
+        });
     });
 });
 
@@ -257,7 +266,6 @@ function buscarPaciente() {
     const pacientesEncontrados = dia.buscarPorNombreApellido(nombre, apellido);
     mostrarResultadosBusqueda(pacientesEncontrados);
 }
-
 function mostrarResultadosBusqueda(pacientes) {
     const listado = document.getElementById('listadoDePacientes');
 
@@ -283,4 +291,17 @@ function mostrarResultadosBusqueda(pacientes) {
             <hr>
         </div>
     `).join('');
+}
+
+// Función para buscar por fecha
+function buscarPorFecha() {
+    const fecha = document.getElementById('buscarFecha').value.trim();
+    
+    if (!fecha) {
+        alert('Por favor ingrese una fecha para buscar');
+        return;
+    }
+
+    const pacientesEncontrados = dia.buscarPorFecha(fecha);
+    mostrarResultadosBusqueda(pacientesEncontrados);
 }
