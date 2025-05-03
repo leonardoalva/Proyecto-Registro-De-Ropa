@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1;
+  padding: 20px;
+  color: #333;
+}
+h1 {
+  color: #2c3e50;
+  text-align: center;
+}
+.form-container {
+  width: 70%;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+#formularioPaciente {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  column-gap: 20px;
+}
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.radio-group {
+  display: flex;
+  gap: 15px;
+}
+.radio-option {
+  display: flex;
+  align-items: center;
+}
+.radio-option input {
+  margin-right: 5px;
+}
+.botones {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+#PantallaPrincipal {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+#listadoDePacientes {
+  margin-top: 40px;
+}
+
+
+#PantallaDeVista {
+  width: 100%;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  height: 50px;
+  width: 100%;
+}
+button:hover {
+  background-color: #2980b9;
+}
+
+p {
+  font-size: small;
+}
