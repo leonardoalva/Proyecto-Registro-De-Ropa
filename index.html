@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Pacientes - Veterinaria</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script defer src="./js/02.js"></script>
+</head>
+
+</head>
+<body>
+
+
+<div id="PantallaPrincipal">
+    <div class="form-container">
+        <form id="formularioPaciente">
+            <div class="form-group">
+                <label for="nombre">Nombre del paciente:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="apellido">Apellido del tutor:</label>
+                <input type="text" id="apellido" name="apellido" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email del tutor:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="celular">Celular del tutor:</label>
+                <input type="tel" id="celular" name="celular" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="edad">Edad del paciente:</label>
+                <input type="text" id="edad" name="edad" min="0" required>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="sexo">Sexo</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="">Seleccione sexo</option>
+                    <option value="femenino">♀</option>
+                    <option value="masculino">♂</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="especie">Especie:</label>
+                <select id="especie" name="especie" required>
+                    <option value="">Seleccione una especie</option>
+                    <option value="canino">Canino</option>
+                    <option value="felino">Felino</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="raza">Raza:</label>
+                <input type="text" id="raza" name="raza" required>
+            </div>
+
+            <div class="form-group">
+                <label for="estudio">Estudio:</label>
+                <input type="text" id="estudio" name="estudio" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="text" id="fecha" name="fecha" required>
+            </div>
+            
+            <div class="form-group">
+                <label>¿Está castrado?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="castrado_si" name="castrado" value="si" required>
+                        <label for="castrado_si">Sí</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="castrado_no" name="castrado" value="no">
+                        <label for="castrado_no">No</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="profesional">Profesional asignado:</label>
+                <input type="text" id="profesional" name="profesional" required>
+
+            </div>
+                <div class="botones">
+                <button type="button" onclick="agregarPaciente()">Agregar Paciente</button>
+                <button type="button" onclick="mostrarListado()">Mostrar Listado</button>
+                <button type="button" onclick="mostrarUltimoAgregado()">Ultimo Agregado</button>
+                </div>
+                
+            </form>
+    </div>
+<div id="PantallaDeVista">
+<h1>Registro de Pacientes Veterinarios</h1>
+    <p id="listadoDePacientes"></p>
+</div>
+</div>
+</body>
+</html>
