@@ -125,6 +125,16 @@ class Dia {
             </div>
         `).join('');
     }
+
+    buscarPorNombreApellido(nombre, apellido) {
+        const nombreBusqueda = nombre.toLowerCase();
+        const apellidoBusqueda = apellido.toLowerCase();
+
+        return this.pacientes.filter(paciente =>
+            paciente.nombre.toLowerCase().includes(nombreBusqueda) &&
+            paciente.apellido.toLowerCase().includes(apellidoBusqueda)
+        );
+    }
 }
 
 
@@ -136,7 +146,7 @@ function agregarPaciente() {
     // Validación básica
     const nombre = document.getElementById('nombre').value.trim();
     const apellido = document.getElementById('apellido').value.trim();
-    
+
     if (!nombre || !apellido) {
         alert('Nombre y apellido son campos obligatorios');
         return;
@@ -154,15 +164,15 @@ function agregarPaciente() {
     const profesional = document.getElementById('profesional').value;
 
     const paciente = new Paciente(
-        nombre, apellido, email, edad, raza, 
+        nombre, apellido, email, edad, raza,
         especie, sexo, castrado, profesional, celular, estudio, fecha
     );
-    
+
     dia.agregarPaciente(paciente);
 
     // Limpiar formulario
     document.getElementById('formularioPaciente').reset();
-    
+
     // Mostrar feedback al usuario
     alert('Paciente agregado correctamente');
 }
@@ -182,21 +192,21 @@ function mostrarUltimoAgregado() {
 function habilitarEdicion(pacienteId, campo) {
     const pacienteElement = document.querySelector(`.paciente[data-id="${pacienteId}"]`);
     const campoElement = pacienteElement.querySelector(`[data-field="${campo}"]`);
-    
+
     const valorActual = campoElement.textContent;
     campoElement.innerHTML = `
         <input type="text" value="${valorActual}" class="edit-input">
         <button style="width:45%; margin-bot:10px" class="guardar-btn">Guardar</button>
         <button style="width:45%" class="cancelar-btn">Cancelar</button>
     `;
-    
+
     // Guardar al hacer click
     pacienteElement.querySelector('.guardar-btn').addEventListener('click', () => {
         const nuevoValor = pacienteElement.querySelector('.edit-input').value;
         dia.actualizarPaciente(pacienteId, campo, nuevoValor);
         mostrarListado();
     });
-    
+
     // Cancelar edición
     pacienteElement.querySelector('.cancelar-btn').addEventListener('click', () => {
         mostrarListado();
@@ -209,7 +219,7 @@ function manejarEdicion() {
         if (event.target.classList.contains('editar-btn')) {
             const pacienteId = parseInt(event.target.getAttribute('data-id'));
             const campo = prompt("¿Qué campo deseas editar? (nombre, apellido, email, edad, raza, especie, sexo, castrado, profesional, celular, estudio, fecha)");
-            
+
             if (campo && Object.keys(new Paciente()).includes(campo)) {
                 habilitarEdicion(pacienteId, campo);
             } else {
@@ -219,8 +229,58 @@ function manejarEdicion() {
     });
 }
 
-// Inicializar el manejador de eventos al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
+// Inicializar el manejador de eventos al cargar la página  //
+document.addEventListener('DOMContentLoaded', function () {
     mostrarListado();
     manejarEdicion();
+
+    // Opcional: Permitir buscar al presionar Enter
+    document.getElementById('buscarNombre').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') buscarPaciente();
+    });
+    document.getElementById('buscarApellido').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') buscarPaciente();
+    });
 });
+
+
+// buscar por nombre y apellido //
+function buscarPaciente() {
+    const nombre = document.getElementById('buscarNombre').value.trim();
+    const apellido = document.getElementById('buscarApellido').value.trim();
+
+    if (!nombre && !apellido) {
+        alert('Por favor ingrese al menos un nombre o apellido para buscar');
+        return;
+    }
+
+    const pacientesEncontrados = dia.buscarPorNombreApellido(nombre, apellido);
+    mostrarResultadosBusqueda(pacientesEncontrados);
+}
+
+function mostrarResultadosBusqueda(pacientes) {
+    const listado = document.getElementById('listadoDePacientes');
+
+    if (pacientes.length === 0) {
+        listado.innerHTML = "No se encontraron pacientes con esos criterios.";
+        return;
+    }
+
+    listado.innerHTML = pacientes.map(paciente => `
+        <div class="paciente">
+            <p><strong>Nombre:</strong> ${paciente.nombre}</p>
+            <p><strong>Apellido:</strong> ${paciente.apellido}</p>
+            <p><strong>Email:</strong> ${paciente.email}</p>
+            <p><strong>Edad:</strong> ${paciente.edad}</p>
+            <p><strong>Raza:</strong> ${paciente.raza}</p>
+            <p><strong>Especie:</strong> ${paciente.especie}</p>
+            <p><strong>Sexo:</strong> ${paciente.sexo}</p>
+            <p><strong>Castrado:</strong> ${paciente.castrado}</p>
+            <p><strong>Profesional:</strong> ${paciente.profesional}</p>
+            <p><strong>Celular:</strong> ${paciente.celular}</p>
+            <p><strong>Estudio:</strong> ${paciente.estudio}</p>
+            <p><strong>Fecha:</strong> ${paciente.fecha}</p>
+            <hr>
+        </div>
+    `).join('');
+}

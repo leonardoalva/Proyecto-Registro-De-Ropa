@@ -99,3 +99,8 @@ button:hover {
 p {
   font-size: small;
 }
+
+.moverAlaIsquierda{
+  position: relative;
+  left: 30px;
+}
