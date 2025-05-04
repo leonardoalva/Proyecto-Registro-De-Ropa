@@ -246,7 +246,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('buscarApellido').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') buscarPaciente();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
     document.getElementById('buscarFecha').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') buscarPorFecha();
         });
@@ -267,7 +270,6 @@ function buscarPaciente() {
     const pacientesEncontrados = dia.buscarPorNombreApellido(nombre, apellido);
     mostrarResultadosBusqueda(pacientesEncontrados);
 }
-
 function mostrarResultadosBusqueda(pacientes) {
     const listado = document.getElementById('listadoDePacientes');
 

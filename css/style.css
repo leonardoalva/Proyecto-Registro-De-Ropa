@@ -20,7 +20,10 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 100%;
   margin: 20px;
+<<<<<<< HEAD
   padding: 20px;
+=======
+>>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
 }
 #formularioPaciente {
   width: 100%;
@@ -68,7 +71,10 @@ select {
   flex-direction: row;
   gap: 10px;
   margin-bottom: 10px;
+<<<<<<< HEAD
   border-radius: 20px;
+=======
+>>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
 }
 
 #PantallaPrincipal {
@@ -102,10 +108,17 @@ select {
 
 
 #PantallaDeVista {
+<<<<<<< HEAD
   width: 100%;
   background-color: rgba(169, 169, 169, 0.432);
   margin: 20px;
   padding: 20px;}
+=======
+  width: 70%;
+  border: 5px solid black;
+  padding: 30px;
+}
+>>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
 
 button {
   background-color: #3498db;
@@ -115,15 +128,27 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+<<<<<<< HEAD
   height: 100%;
+=======
+  height: 50px;
+  width: 100%;
+  gap: 10px;
+>>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
 }
 button:hover {
   background-color: #2980b9;
 }
 
 p {
+<<<<<<< HEAD
   font-size: 1.2em;
   margin-left: 10px;
+=======
+  font-size: 15px;
+  margin-left: 10px;
+
+>>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
 }
 
 .moverAlaIsquierda{
