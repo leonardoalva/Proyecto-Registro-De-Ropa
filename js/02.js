@@ -1,54 +1,46 @@
-class Paciente {
-    constructor(nombre, apellido, email, edad, raza, especie, sexo, castrado, profesional, celular, estudio, fecha) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.edad = edad;
-        this.raza = raza;
-        this.especie = especie;
-        this.sexo = sexo;
-        this.castrado = castrado;
-        this.profesional = profesional;
-        this.celular = celular;
-        this.estudio = estudio;
-        this.fecha = fecha;
+class Producto {
+    constructor(linea,producto,descripcion,precio) {
+        this.linea = linea;
+        this.producto = producto;
+        this.descripcion = descripcion;
+        this.precio = precio;
     }
 }
 
-class Dia {
+class productosTotal {
     constructor() {
-        this.pacientes = this.cargarPacientes();
+        this.productosTotal = this.cargarProductos();
     }
 
-    cargarPacientes() {
+    cargarProductos() {
         try {
-            const pacientesGuardados = localStorage.getItem('dia');
-            return pacientesGuardados ? JSON.parse(pacientesGuardados) : [];
+            const productosGuardados = localStorage.getItem('productos');
+            return productosGuardados ? JSON.parse(productosGuardados) : [];
         } catch (error) {
-            console.error('Error al cargar pacientes:', error);
+            console.error('Error al cargar productos:', error);
             return [];
         }
     }
 
-    agregarPaciente(paciente) {
-        this.pacientes.push(paciente);
-        this.guardarPacientes();
+    agregarProducto(producto) {
+        this.productosTotal.push(producto);
+        this.guardarProducto();
     }
 
-    guardarPacientes() {
+    guardarProductos() {
         try {
-            localStorage.setItem('dia', JSON.stringify(this.pacientes));
+            localStorage.setItem('productos', JSON.stringify(this.productosTotal));
         } catch (error) {
             console.error('Error al guardar pacientes:', error);
         }
     }
 
     mostrarListado() {
-        if (this.pacientes.length === 0) {
+        if (this.productosTotal.length === 0) {
             return "No hay pacientes registrados.";
         }
-        return this.pacientes.map(paciente => `
-            <div class="paciente">
+        return this.productosTotal.map(paciente => `
+            <div class="ProductosTotal">
                 <p><strong>Nombre:</strong> ${paciente.nombre}</p>
                 <p><strong>Apellido:</strong> ${paciente.apellido}</p>
                 <p><strong>Email:</strong> ${paciente.email}</p>
@@ -137,7 +129,7 @@ class Dia {
     }
 
     buscarPorFecha(fecha) {
-        return this.pacientes.filter(paciente => 
+        return this.pacientes.filter(paciente =>
             paciente.fecha === fecha
         );
     }
@@ -246,9 +238,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('buscarApellido').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') buscarPaciente();
-        
-    document.getElementById('buscarFecha').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') buscarPorFecha();
+
+        document.getElementById('buscarFecha').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') buscarPorFecha();
         });
     });
 });
@@ -298,7 +290,7 @@ function mostrarResultadosBusqueda(pacientes) {
 // Función para buscar por fecha
 function buscarPorFecha() {
     const fecha = document.getElementById('buscarFecha').value.trim();
-    
+
     if (!fecha) {
         alert('Por favor ingrese una fecha para buscar');
         return;
