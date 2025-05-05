@@ -5,36 +5,36 @@
 
 body {
   font-family: Arial, sans-serif;
-  line-height: 1;
-  padding: 20px;
   color: #333;
 }
 h1 {
   color: #2c3e50;
   text-align: center;
 }
+
 .form-container {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 100%;
   margin: 20px;
-<<<<<<< HEAD
   padding: 20px;
-=======
->>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
 }
 #formularioPaciente {
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  column-gap: 20px;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 .form-group {
-  margin-bottom: 15px;
-  width: 100%;
+  margin-bottom: 10px;
+  width: 45%;
 }
 label {
   display: block;
@@ -71,10 +71,7 @@ select {
   flex-direction: row;
   gap: 10px;
   margin-bottom: 10px;
-<<<<<<< HEAD
   border-radius: 20px;
-=======
->>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
 }
 
 #PantallaPrincipal {
@@ -84,6 +81,9 @@ select {
   width: 100%;
 }
 
+nav {
+  height: 100%;
+}
 
 .busqueda{
   margin: 20px;
@@ -102,23 +102,21 @@ select {
 }
 
 #listadoDePacientes {
-  margin-top: 40px;
+  margin-top: 20px;
   width: 100%;
+  margin: 20px 0px 0px 30px;
 }
 
 
 #PantallaDeVista {
-<<<<<<< HEAD
   width: 100%;
-  background-color: rgba(169, 169, 169, 0.432);
+  background-color: rgb(232, 231, 231);
   margin: 20px;
-  padding: 20px;}
-=======
-  width: 70%;
-  border: 5px solid black;
-  padding: 30px;
+  padding: 20px;
+  border-radius: 10px;  
 }
->>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
+
+
 
 button {
   background-color: #3498db;
@@ -128,28 +126,12 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-<<<<<<< HEAD
   height: 100%;
-=======
-  height: 50px;
-  width: 100%;
-  gap: 10px;
->>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
 }
 button:hover {
   background-color: #2980b9;
 }
 
-p {
-<<<<<<< HEAD
-  font-size: 1.2em;
-  margin-left: 10px;
-=======
-  font-size: 15px;
-  margin-left: 10px;
-
->>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
-}
 
 .moverAlaIsquierda{
   position: relative;
@@ -158,5 +140,14 @@ p {
 
 .contenedor{
   margin: 0 auto;
-  width: 90%;
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 50px;
+}
+
+div h3 {
+  color: aliceblue;
 }

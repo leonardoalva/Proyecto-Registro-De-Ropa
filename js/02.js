@@ -120,8 +120,8 @@ class Dia {
                 <p><strong>Celular:</strong> <span class="editable" data-field="celular">${paciente.celular}</span></p>
                 <p><strong>Estudio:</strong> <span class="editable" data-field="estudio">${paciente.estudio}</span></p>
                 <p><strong>Fecha:</strong> <span class="editable" data-field="fecha">${paciente.fecha}</span></p>
-                <button class="editar-btn" style="text-align:center" data-id="${index}">Editar</button>
-                <hr>
+                <div style="display: flex; flex-direction:column; width: 50%; margin: 0 auto;"><button class="editar-btn" style="text-align:center; border-radius:10px;" data-id="${index}">Editar</button>
+                </div>
             </div>
         `).join('');
     }
@@ -246,10 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.getElementById('buscarApellido').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') buscarPaciente();
-<<<<<<< HEAD
-
-=======
->>>>>>> 58c6c2cad173bc99db74bbb07431bffe9ddc1ba1
+        
     document.getElementById('buscarFecha').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') buscarPorFecha();
         });
@@ -270,6 +267,7 @@ function buscarPaciente() {
     const pacientesEncontrados = dia.buscarPorNombreApellido(nombre, apellido);
     mostrarResultadosBusqueda(pacientesEncontrados);
 }
+
 function mostrarResultadosBusqueda(pacientes) {
     const listado = document.getElementById('listadoDePacientes');
 
@@ -308,4 +306,9 @@ function buscarPorFecha() {
 
     const pacientesEncontrados = dia.buscarPorFecha(fecha);
     mostrarResultadosBusqueda(pacientesEncontrados);
+}
+
+function limpiarListado() {
+    const listado = document.getElementById('listadoDePacientes');
+    listado.innerHTML = "";
 }
