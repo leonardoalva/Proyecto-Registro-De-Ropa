@@ -151,6 +151,7 @@ function habilitarEdicion(productoId, campo) {
     productoElement.querySelector('.guardar-btn').addEventListener('click', () => {
         const nuevoValor = productoElement.querySelector('.edit-input').value;
         productos.actualizarProducto(productoId, campo, nuevoValor);
+
         mostrarListado();
     });
 
@@ -180,14 +181,12 @@ function manejarEdicion() {
 document.addEventListener('DOMContentLoaded', function () {
     mostrarListado();
     manejarEdicion();
-    mostrarUltimoAgregado();
 });
 
 
 
 function mostrarResultadosBusqueda(productos) {
     const listado = document.getElementById('listadoDeProductos');
-
     if (productos.length === 0) {
         listado.innerHTML = "No se encontraron productos con esos criterios.";
         return;
