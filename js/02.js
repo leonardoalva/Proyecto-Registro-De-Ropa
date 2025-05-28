@@ -1,5 +1,5 @@
 class Producto {
-    constructor(linea,producto,descripcion,precio) {
+    constructor(linea, producto, descripcion, precio) {
         this.linea = linea;
         this.producto = producto;
         this.descripcion = descripcion;
@@ -7,9 +7,9 @@ class Producto {
     }
 }
 
-class productosTotal {
+class ProductosTotal {
     constructor() {
-        this.productosTotal = this.cargarProductos();
+        this.productos = this.cargarProductos();
     }
 
     cargarProductos() {
@@ -23,173 +23,122 @@ class productosTotal {
     }
 
     agregarProducto(producto) {
-        this.productosTotal.push(producto);
-        this.guardarProducto();
+        this.productos.push(producto);
+        this.guardarProductos();
     }
 
     guardarProductos() {
         try {
-            localStorage.setItem('productos', JSON.stringify(this.productosTotal));
+            localStorage.setItem('productos', JSON.stringify(this.productos));
         } catch (error) {
-            console.error('Error al guardar pacientes:', error);
+            console.error('Error al guardar productos:', error);
         }
     }
 
     mostrarListado() {
-        if (this.productosTotal.length === 0) {
-            return "No hay pacientes registrados.";
+        if (this.productos.length === 0) {
+            return "No hay productos registrados.";
         }
-        return this.productosTotal.map(paciente => `
-            <div class="ProductosTotal">
-                <p><strong>Nombre:</strong> ${paciente.nombre}</p>
-                <p><strong>Apellido:</strong> ${paciente.apellido}</p>
-                <p><strong>Email:</strong> ${paciente.email}</p>
-                <p><strong>Edad:</strong> ${paciente.edad}</p>
-                <p><strong>Raza:</strong> ${paciente.raza}</p>
-                <p><strong>Especie:</strong> ${paciente.especie}</p>
-                <p><strong>Sexo:</strong> ${paciente.sexo}</p>
-                <p><strong>Castrado:</strong> ${paciente.castrado}</p>
-                <p><strong>Profesional:</strong> ${paciente.profesional}</p>
-                <p><strong>Celular:</strong> ${paciente.celular}</p>
-                <p><strong>Estudio:</strong> ${paciente.estudio}</p>
-                <p><strong>Fecha:</strong> ${paciente.fecha}</p>
-                <hr>
+        return this.productos.map((producto, index) => `
+            <div class="producto" data-id="${index}">
+                <p><strong>Linea:</strong> <span class="editable" data-field="linea">${producto.linea}</span></p>
+                <p><strong>Producto:</strong> <span class="editable" data-field="producto">${producto.producto}</span></p>
+                <p><strong>Descripcion:</strong> <span class="editable" data-field="descripcion">${producto.descripcion}</span></p>
+                <p><strong>Precio:</strong> <span class="editable" data-field="precio">${producto.precio}</span></p>
+                <div style="display: flex; flex-direction:column; width: 50%; margin: 0 auto;">
+                    <button class="editar-btn" style="text-align:center; border-radius:10px;" data-id="${index}">Editar</button>
+                </div>
             </div>
         `).join('');
     }
 
     mostrarUltimoAgregado() {
-        if (this.pacientes.length === 0) {
-            return "No hay pacientes registrados.";
+        if (this.productos.length === 0) {
+            return "No hay productos registrados.";
         }
-        const paciente = this.pacientes[this.pacientes.length - 1];
+        const producto = this.productos[this.productos.length - 1];
         return `
-            <div class="paciente">
-                <p><strong>Último paciente agregado:</strong></p>
-                <p><strong>Nombre:</strong> ${paciente.nombre}</p>
-                <p><strong>Apellido:</strong> ${paciente.apellido}</p>
-                <p><strong>Email:</strong> ${paciente.email}</p>
-                <p><strong>Edad:</strong> ${paciente.edad}</p>
-                <p><strong>Raza:</strong> ${paciente.raza}</p>
-                <p><strong>Especie:</strong> ${paciente.especie}</p>
-                <p><strong>Sexo:</strong> ${paciente.sexo}</p>
-                <p><strong>Castrado:</strong> ${paciente.castrado}</p>
-                <p><strong>Profesional:</strong> ${paciente.profesional}</p>
-                <p><strong>Celular:</strong> ${paciente.celular}</p>
-                <p><strong>Estudio:</strong> ${paciente.estudio}</p>
-                <p><strong>Fecha:</strong> ${paciente.fecha}</p>
+            <div class="producto">
+                <p><strong>Último producto agregado:</strong></p>
+                <p><strong>Linea:</strong> ${producto.linea}</p>
+                <p><strong>Producto:</strong> ${producto.producto}</p>
+                <p><strong>Descripcion:</strong> ${producto.descripcion}</p>
+                <p><strong>Precio:</strong> ${producto.precio}</p>
             </div>
         `;
     }
 
-    buscarPacientePorId(id) {
-        return this.pacientes.find((paciente, index) => index === id);
-    }
-
-    actualizarPaciente(id, campo, nuevoValor) {
-        if (id >= 0 && id < this.pacientes.length) {
-            this.pacientes[id][campo] = nuevoValor;
-            this.guardarPacientes();
+    actualizarProducto(id, campo, nuevoValor) {
+        if (id >= 0 && id < this.productos.length) {
+            this.productos[id][campo] = nuevoValor;
+            this.guardarProductos();
             return true;
         }
         return false;
     }
+
     mostrarListado() {
-        if (this.pacientes.length === 0) {
+        if (this.productos.length === 0) {
             return "No hay pacientes registrados.";
         }
-        return this.pacientes.map((paciente, index) => `
-            <div class="paciente" data-id="${index}">
-                <p><strong>Nombre:</strong> <span class="editable" data-field="nombre">${paciente.nombre}</span></p>
-                <p><strong>Apellido:</strong> <span class="editable" data-field="apellido">${paciente.apellido}</span></p>
-                <p><strong>Email:</strong> <span class="editable" data-field="email">${paciente.email}</span></p>
-                <p><strong>Edad:</strong> <span class="editable" data-field="edad">${paciente.edad}</span></p>
-                <p><strong>Raza:</strong> <span class="editable" data-field="raza">${paciente.raza}</span></p>
-                <p><strong>Especie:</strong> <span class="editable" data-field="especie">${paciente.especie}</span></p>
-                <p><strong>Sexo:</strong> <span class="editable" data-field="sexo">${paciente.sexo}</span></p>
-                <p><strong>Castrado:</strong> <span class="editable" data-field="castrado">${paciente.castrado}</span></p>
-                <p><strong>Profesional:</strong> <span class="editable" data-field="profesional">${paciente.profesional}</span></p>
-                <p><strong>Celular:</strong> <span class="editable" data-field="celular">${paciente.celular}</span></p>
-                <p><strong>Estudio:</strong> <span class="editable" data-field="estudio">${paciente.estudio}</span></p>
-                <p><strong>Fecha:</strong> <span class="editable" data-field="fecha">${paciente.fecha}</span></p>
+        return this.productos.map((producto, index) => `
+            <div class="producto" data-id="${index}">
+                <p><strong>linea:</strong> <span class="editable" data-field="linea">${producto.linea}</span></p>
+                <p><strong>Producto:</strong> <span class="editable" data-field="producto">${producto.producto}</span></p>
+                <p><strong>Descripcion:</strong> <span class="editable" data-field="descripcion">${producto.descripcion}</span></p>
+                <p><strong>precio:</strong> <span class="editable" data-field="precio">${producto.precio}</span></p>
                 <div style="display: flex; flex-direction:column; width: 50%; margin: 0 auto;"><button class="editar-btn" style="text-align:center; border-radius:10px;" data-id="${index}">Editar</button>
                 </div>
             </div>
         `).join('');
     }
 
-    buscarPorNombreApellido(nombre, apellido) {
-        const nombreBusqueda = nombre.toLowerCase();
-        const apellidoBusqueda = apellido.toLowerCase();
-
-        return this.pacientes.filter(paciente =>
-            paciente.nombre.toLowerCase().includes(nombreBusqueda) &&
-            paciente.apellido.toLowerCase().includes(apellidoBusqueda)
-        );
-    }
-
-    buscarPorFecha(fecha) {
-        return this.pacientes.filter(paciente =>
-            paciente.fecha === fecha
-        );
-    }
 }
 
 
-// Crear instancia global de Dia
-const dia = new Dia();
+// Crear instancia global
+const productos = new ProductosTotal(); // Con mayúscula
 
-// Función para agregar paciente desde el formulario
-function agregarPaciente() {
-    // Validación básica
-    const nombre = document.getElementById('nombre').value.trim();
-    const apellido = document.getElementById('apellido').value.trim();
+function agregarProducto() {
+    const linea = document.getElementById('linea').value.trim();
+    const producto = document.getElementById('producto').value.trim();
 
-    if (!nombre || !apellido) {
-        alert('Nombre y apellido son campos obligatorios');
+    if (!linea || !producto) {
+        alert('Linea y Producto son campos obligatorios');
         return;
     }
 
-    const email = document.getElementById('email').value.trim();
-    const celular = document.getElementById('celular').value.trim();
-    const edad = document.getElementById('edad').value.trim();
-    const especie = document.getElementById('especie').value;
-    const estudio = document.getElementById('estudio').value;
-    const fecha = document.getElementById('fecha').value;
-    const sexo = document.getElementById('sexo').value;
-    const raza = document.getElementById('raza').value.trim();
-    const castrado = document.querySelector('input[name="castrado"]:checked')?.value || 'No';
-    const profesional = document.getElementById('profesional').value;
+    const descripcion = document.getElementById('descripcion').value.trim();
+    const precio = document.getElementById('precio').value;
 
-    const paciente = new Paciente(
-        nombre, apellido, email, edad, raza,
-        especie, sexo, castrado, profesional, celular, estudio, fecha
+    const productoNuevo = new Producto(
+        linea, producto, descripcion, precio
     );
 
-    dia.agregarPaciente(paciente);
-
-    // Limpiar formulario
-    document.getElementById('formularioPaciente').reset();
-
-    // Mostrar feedback al usuario
-    alert('Paciente agregado correctamente');
+    productos.agregarProducto(productoNuevo); // Usar la instancia 'productos'
+    document.getElementById('formularioAgregar').reset();
+    alert('Producto agregado correctamente');
 }
+
+
+
+
 
 // Función para mostrar listado
 function mostrarListado() {
-    const listado = document.getElementById('listadoDePacientes');
-    listado.innerHTML = dia.mostrarListado();
+    const listado = document.getElementById('listadoDeProductos');
+    listado.innerHTML = productos.mostrarListado();
 }
 
 // Función para mostrar último agregado
 function mostrarUltimoAgregado() {
-    const listado = document.getElementById('listadoDePacientes');
-    listado.innerHTML = dia.mostrarUltimoAgregado();
+    const listado = document.getElementById('listadoDeProductos');
+    listado.innerHTML = productos.mostrarUltimoAgregado();
 }
 
-function habilitarEdicion(pacienteId, campo) {
-    const pacienteElement = document.querySelector(`.paciente[data-id="${pacienteId}"]`);
-    const campoElement = pacienteElement.querySelector(`[data-field="${campo}"]`);
+function habilitarEdicion(productoId, campo) {
+    const productoElement = document.querySelector(`.producto[data-id="${productoId}"]`);
+    const campoElement = productoElement.querySelector(`[data-field="${campo}"]`);
 
     const valorActual = campoElement.textContent;
     campoElement.innerHTML = `
@@ -199,27 +148,27 @@ function habilitarEdicion(pacienteId, campo) {
     `;
 
     // Guardar al hacer click
-    pacienteElement.querySelector('.guardar-btn').addEventListener('click', () => {
-        const nuevoValor = pacienteElement.querySelector('.edit-input').value;
-        dia.actualizarPaciente(pacienteId, campo, nuevoValor);
+    productoElement.querySelector('.guardar-btn').addEventListener('click', () => {
+        const nuevoValor = productoElement.querySelector('.edit-input').value;
+        productos.actualizarProducto(productoId, campo, nuevoValor);
         mostrarListado();
     });
 
     // Cancelar edición
-    pacienteElement.querySelector('.cancelar-btn').addEventListener('click', () => {
+    productoElement.querySelector('.cancelar-btn').addEventListener('click', () => {
         mostrarListado();
     });
 }
 
-// Función para manejar la edición de pacientes
+// Función para manejar la edición de productos
 function manejarEdicion() {
-    document.getElementById('listadoDePacientes').addEventListener('click', (event) => {
+    document.getElementById('listadoDeProductos').addEventListener('click', (event) => {
         if (event.target.classList.contains('editar-btn')) {
-            const pacienteId = parseInt(event.target.getAttribute('data-id'));
-            const campo = prompt("¿Qué campo deseas editar? (nombre, apellido, email, edad, raza, especie, sexo, castrado, profesional, celular, estudio, fecha)");
+            const productoId = parseInt(event.target.getAttribute('data-id'));
+            const campo = prompt("¿Qué campo deseas editar? (linea, producto, descripcion, precio)");
 
-            if (campo && Object.keys(new Paciente()).includes(campo)) {
-                habilitarEdicion(pacienteId, campo);
+            if (campo && Object.keys(new Producto()).includes(campo)) {
+                habilitarEdicion(productoId, campo);
             } else {
                 alert("Campo no válido");
             }
@@ -231,76 +180,32 @@ function manejarEdicion() {
 document.addEventListener('DOMContentLoaded', function () {
     mostrarListado();
     manejarEdicion();
-
-    // Opcional: Permitir buscar al presionar Enter
-    document.getElementById('buscarNombre').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') buscarPaciente();
-    });
-    document.getElementById('buscarApellido').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') buscarPaciente();
-
-        document.getElementById('buscarFecha').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') buscarPorFecha();
-        });
-    });
+    mostrarUltimoAgregado();
 });
 
 
-// buscar por nombre y apellido //
-function buscarPaciente() {
-    const nombre = document.getElementById('buscarNombre').value.trim();
-    const apellido = document.getElementById('buscarApellido').value.trim();
 
-    if (!nombre && !apellido) {
-        alert('Por favor ingrese al menos un nombre o apellido para buscar');
+function mostrarResultadosBusqueda(productos) {
+    const listado = document.getElementById('listadoDeProductos');
+
+    if (productos.length === 0) {
+        listado.innerHTML = "No se encontraron productos con esos criterios.";
         return;
     }
 
-    const pacientesEncontrados = dia.buscarPorNombreApellido(nombre, apellido);
-    mostrarResultadosBusqueda(pacientesEncontrados);
-}
-
-function mostrarResultadosBusqueda(pacientes) {
-    const listado = document.getElementById('listadoDePacientes');
-
-    if (pacientes.length === 0) {
-        listado.innerHTML = "No se encontraron pacientes con esos criterios.";
-        return;
-    }
-
-    listado.innerHTML = pacientes.map(paciente => `
-        <div class="paciente">
-            <p><strong>Nombre:</strong> ${paciente.nombre}</p>
-            <p><strong>Apellido:</strong> ${paciente.apellido}</p>
-            <p><strong>Email:</strong> ${paciente.email}</p>
-            <p><strong>Edad:</strong> ${paciente.edad}</p>
-            <p><strong>Raza:</strong> ${paciente.raza}</p>
-            <p><strong>Especie:</strong> ${paciente.especie}</p>
-            <p><strong>Sexo:</strong> ${paciente.sexo}</p>
-            <p><strong>Castrado:</strong> ${paciente.castrado}</p>
-            <p><strong>Profesional:</strong> ${paciente.profesional}</p>
-            <p><strong>Celular:</strong> ${paciente.celular}</p>
-            <p><strong>Estudio:</strong> ${paciente.estudio}</p>
-            <p><strong>Fecha:</strong> ${paciente.fecha}</p>
+    listado.innerHTML = productos.map(producto => `
+        <div class="producto">
+            <p><strong>Linea:</strong> ${producto.linea}</p>
+            <p><strong>Producto:</strong> ${producto.producto}</p>
+            <p><strong>Descripcion:</strong> ${producto.descripcion}</p>
+            <p><strong>Precio:</strong> ${producto.precio}</p>
             <hr>
         </div>
     `).join('');
 }
 
-// Función para buscar por fecha
-function buscarPorFecha() {
-    const fecha = document.getElementById('buscarFecha').value.trim();
-
-    if (!fecha) {
-        alert('Por favor ingrese una fecha para buscar');
-        return;
-    }
-
-    const pacientesEncontrados = dia.buscarPorFecha(fecha);
-    mostrarResultadosBusqueda(pacientesEncontrados);
-}
 
 function limpiarListado() {
-    const listado = document.getElementById('listadoDePacientes');
+    const listado = document.getElementById('listadoDeProductos');
     listado.innerHTML = "";
 }
