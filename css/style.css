@@ -105,6 +105,8 @@ nav {
   margin-top: 20px;
   width: 100%;
   margin: 20px 0px 0px 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 
