@@ -57,15 +57,19 @@ class ProductosTotal {
             return "No hay productos registrados.";
         }
         const producto = this.productos[this.productos.length - 1];
+        const id = this.productos.length - 1; // Obtenemos el ID del último producto
         return `
-            <div class="producto">
-                <p><strong>Último producto agregado:</strong></p>
-                <p><strong>Linea:</strong> ${producto.linea}</p>
-                <p><strong>Producto:</strong> ${producto.producto}</p>
-                <p><strong>Descripcion:</strong> ${producto.descripcion}</p>
-                <p><strong>Precio:</strong> ${producto.precio}</p>
+        <div class="producto" data-id="${id}">
+            <p><strong>Último producto agregado:</strong></p>
+            <p><strong>Linea:</strong> <span class="editable" data-field="linea">${producto.linea}</span></p>
+            <p><strong>Producto:</strong> <span class="editable" data-field="producto">${producto.producto}</span></p>
+            <p><strong>Descripcion:</strong> <span class="editable" data-field="descripcion">${producto.descripcion}</span></p>
+            <p><strong>Precio:</strong> <span class="editable" data-field="precio">${producto.precio}</span></p>
+            <div style="display: flex; flex-direction:column; width: 50%; margin: 0 auto;">
+                <button class="editar-btn" style="text-align:center; border-radius:10px;" data-id="${id}">Editar</button>
             </div>
-        `;
+        </div>
+    `;
     }
 
     actualizarProducto(id, campo, nuevoValor) {
@@ -75,22 +79,6 @@ class ProductosTotal {
             return true;
         }
         return false;
-    }
-
-    mostrarListado() {
-        if (this.productos.length === 0) {
-            return "No hay pacientes registrados.";
-        }
-        return this.productos.map((producto, index) => `
-            <div class="producto" data-id="${index}">
-                <p><strong>linea:</strong> <span class="editable" data-field="linea">${producto.linea}</span></p>
-                <p><strong>Producto:</strong> <span class="editable" data-field="producto">${producto.producto}</span></p>
-                <p><strong>Descripcion:</strong> <span class="editable" data-field="descripcion">${producto.descripcion}</span></p>
-                <p><strong>precio:</strong> <span class="editable" data-field="precio">${producto.precio}</span></p>
-                <div style="display: flex; flex-direction:column; width: 50%; margin: 0 auto;"><button class="editar-btn" style="text-align:center; border-radius:10px;" data-id="${index}">Editar</button>
-                </div>
-            </div>
-        `).join('');
     }
 
 }
@@ -143,22 +131,23 @@ function habilitarEdicion(productoId, campo) {
     const valorActual = campoElement.textContent;
     campoElement.innerHTML = `
         <input type="text" value="${valorActual}" class="edit-input">
-        <button class="guardar-btn">Guardar Cambios</button>
+        <button class="guardar-btn">Guardar</button>
         <button class="cancelar-btn">Cancelar</button>
     `;
 
     // Guardar al hacer click
     productoElement.querySelector('.guardar-btn').addEventListener('click', () => {
         const nuevoValor = productoElement.querySelector('.edit-input').value;
+        if (nuevoValor.trim() === '') {
+            alert("El campo no puede estar vacío");
+            return;
+        }
         productos.actualizarProducto(productoId, campo, nuevoValor);
-
         mostrarListado();
     });
 
     // Cancelar edición
-    productoElement.querySelector('.cancelar-btn').addEventListener('click', () => {
-        mostrarListado();
-    });
+    productoElement.querySelector('.cancelar-btn').addEventListener('click', mostrarListado);
 }
 
 // Función para manejar la edición de productos
@@ -166,12 +155,15 @@ function manejarEdicion() {
     document.getElementById('listadoDeProductos').addEventListener('click', (event) => {
         if (event.target.classList.contains('editar-btn')) {
             const productoId = parseInt(event.target.getAttribute('data-id'));
-            const campo = prompt("¿Qué campo deseas editar? (linea, producto, descripcion, precio)");
+            const campo = document.getElementById('editor').value.trim().toLowerCase();
+            
+            // Limpiar el input después de obtener el valor
+            document.getElementById('editor').value = '';
 
             if (campo && Object.keys(new Producto()).includes(campo)) {
                 habilitarEdicion(productoId, campo);
             } else {
-                alert("Campo no válido");
+                alert("Campo no válido. Los campos válidos son: linea, producto, descripcion, precio");
             }
         }
     });
